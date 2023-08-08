@@ -19,6 +19,7 @@
     "@mui/material": "^5.13.5",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
+    "cors": "^2.8.5",
     "firebase": "^9.15.0",
     "jsonwebtoken": "^9.0.1",
     "otp-input-react": "^0.3.0",

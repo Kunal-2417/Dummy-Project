@@ -7,6 +7,7 @@ import { useEffect, useState,useContext } from "react";
 import PropTypes from 'prop-types';
 import { ResultsContext } from '../../context/ResultContext';
 import { BrandContext } from '../../context/BrandContext';
+import { useAuth } from "../../context/AuthContext";
 import FilterMenu from "../Filtermenu/FilterMenu";
 import Sidebar from "../Filtermenu/FilterMenu";
 import Header from "../Navbar/Header";
@@ -21,7 +22,7 @@ const Portfolio = (props) => {
   });
 
   const { brand, setBrand } = useContext(BrandContext);
-
+  const [auth, setAuth] = useAuth();
   const [companies, setCompanies] = useState({
     Daantwale: false,
     Dentalstall: false,
@@ -100,6 +101,7 @@ const Portfolio = (props) => {
     }
     // const ProductInput=document.querySelector('.channel-input');x
     console.log(props.selectedCompanies);
+    console.log(auth.user);
     const product = props.product
     if (props.selectedCompanies[0][1]) {
       const startTime = performance.now();
@@ -280,7 +282,7 @@ const Portfolio = (props) => {
     const selectedCompanies = Object.entries(companies)
       .map(([company, isSelected]) => [company, isSelected]);
     navigate("/allproducts", {
-      state: { product, companies:selectedCompanies },
+      state: { product, companies:selectedCompanies},
     });
     window.location.reload()
   }
