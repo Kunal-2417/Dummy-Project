@@ -6,30 +6,26 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({
     user: null,
-    
   });
-    //default axios
-//   axios.defaults.headers.common["Authorization"] = auth?.token;
 
- useEffect(() => {
+  useEffect(() => {
     const data = localStorage.getItem("UserInfo");
     if (data) {
-      const user = JSON.parse(data);
-      setAuth({
-        ...auth,
-        user:user,
-        
-      });
+      setAuth((prevAuth) => ({
+        ...prevAuth,
+        user: data,
+      }));
     }
     //eslint-disable-next-line
   }, []);
+
   return (
     <AuthContext.Provider value={[auth, setAuth]}>
       {children}
     </AuthContext.Provider>
   );
 };
-// custom hook
+
 const useAuth = () => useContext(AuthContext);
 
 export { useAuth, AuthProvider };

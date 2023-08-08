@@ -14,7 +14,7 @@ import { CompareProvider } from './context/CompareContext.jsx';
 import { ResultsProvider } from "./context/ResultContext";
 import { BrandProvider } from "./context/BrandContext";
 import { CartProvider } from "./context/CartContext";
-
+import { AuthProvider } from "./context/AuthContext";
 import SignUp from "./Pages/auth/Signup";
 import Login from "./Pages/auth/Login";
 import PhoneSignup from "./Pages/auth/PhoneSignUp";
@@ -35,7 +35,9 @@ const App = () => {
         <ResultsProvider>
       <CompareProvider>
         <CartProvider>
+         <AuthProvider>
          <BrowserRouter>
+
          <Toaster />
         <Routes>
           <Route path='/' element={<Main />} />
@@ -51,6 +53,7 @@ const App = () => {
         </Routes>
         <Footer />
       </BrowserRouter>
+         </AuthProvider>
       </CartProvider>
       </CompareProvider>
       </ResultsProvider>

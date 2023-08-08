@@ -1,35 +1,64 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
+import axios from 'axios';
 // import "./Portfolio.css";
 import "./Cards.css";
 import { Card, CardGroup, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { CompareContext } from '../../context/CompareContext.jsx';
 import { CartContext } from "../../context/CartContext";
+import { useAuth } from "../../context/AuthContext";
 const Cards = (props) => {
   const { addToCompare } = useContext(CompareContext);
   const { addToCart } = useContext(CartContext);
-
+  const [auth, setAuth] = useAuth();
+  console.log(auth);
+  const user = typeof auth.user === 'string' ? JSON.parse(auth.user) : auth.user;
+    console.log(user);
   const handleAddToCompare = () => {
     const newItem = {
-      title: props.title,
-      image: props.image,
-      totalLike: props.totalLike,
-      category: props.category,
+      userId: user._id,
+      name: props.title,
+      price: props.totalLike,
+      link: props.link,
+      img: props.image,
     };
+    console.log(newItem);
 
-    addToCompare(newItem);
+    axios.post('http://localhost:3000/api/compare', newItem, {
+      headers: { 'Content-Type': 'application/json' },
+      // mode: 'no-cors'
+    })
+      .then(response => {
+        console.log(response.data);
+        alert("item added")
 
+        // Optionally, you can update the cart in the state
+        // by calling addToCart here (if it's not automatically updated)
+      })
+      .catch(error => console.error('Error adding item to cart:', error));
   };
+
   const handleAddToCart = () => {
     const newItem = {
-      title: props.title,
-      image: props.image,
-      totalLike: props.totalLike,
-      category: props.category,
+      userId: user._id,
+      name: props.title,
+      price: props.totalLike,
+      link: props.link,
+      img: props.image,
     };
+    console.log(newItem);
 
-    addToCart(newItem);
-
+    axios.post('http://localhost:3000/api/cart', newItem, {
+      headers: { 'Content-Type': 'application/json' },
+      // mode: 'no-cors'
+    })
+      .then(response => {
+        console.log(response.data);
+        alert("item added")
+        // Optionally, you can update the cart in the state
+        // by calling addToCart here (if it's not automatically updated)
+      })
+      .catch(error => console.error('Error adding item to cart:', error));
   };
 
 
@@ -49,6 +78,16 @@ const Cards = (props) => {
     const link = props.link; // Replace with the actual link prop value
     window.open(link, '_blank');
   };
+  // useEffect(() => {
+  //   const data = localStorage.getItem("UserInfo");
+  //   if (data) {
+  //     // const user = JSON.parse(data);
+  //     setAuth({
+  //       ...auth,
+  //       user: data,
+  //     });
+  //   }
+  // }, []);
 
   return (
     <>
@@ -72,6 +111,8 @@ const Cards = (props) => {
         </Card>
       </CardGroup>
 
+      {console.log(auth)}
+      {console.log("KUNAL")}
       {modal && (
         <div className="modal">
           <div onClick={toggleModal} className="overlay"></div>

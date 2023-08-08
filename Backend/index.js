@@ -37,8 +37,9 @@ const myScrapers11 = require('./scrapper11');
 const myScrapers12 = require('./scrapper12');
 const myScrapers13 = require('./scrapper13');
 // console.log(myScrapers)
-
+//middleware?
 const app = express()
+app.use(cors({ origin: 'http://localhost:5173' }));
 // const port=3000
 dotenv.config();
 
