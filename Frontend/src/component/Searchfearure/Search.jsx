@@ -9,12 +9,9 @@ const Search = () => {
   console.log(auth);
   const navigate = useNavigate(); // Navigate hook
   const [companies, setCompanies] = useState({
-    // Amplemeds: false,
     Daantwale: false,
     Dentalstall: false,
-    // Dentaltix: false,
     Dentalworld: false,
-    // Greenguava: false,
     Libraltraders: false,
     Medikabazaar: false,
     Mydentalstock: false,

@@ -23,6 +23,7 @@
     "morgan": "^1.10.0",
     "nodemon": "^3.0.1",
     "puppeteer": "^19.8.3",
+    "python-shell": "^5.0.0",
     "razorpay": "^2.9.1"
   }
 }
